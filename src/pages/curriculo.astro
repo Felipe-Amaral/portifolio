@@ -11,6 +11,12 @@ const todosCursos = await cursos();
 const destaques = todosCursos.filter((c) => c.data.destaque);
 const anos = todosCursos.map((c) => c.data.data.slice(0, 4)).sort();
 const periodo = `${anos[0]} — ${anos[anos.length - 1]}`;
+
+// "Kairos: bilhetagem..." vira rótulo em destaque + texto.
+const separar = (e: string): [string, string] => {
+  const i = e.indexOf(': ');
+  return i > 1 && i <= 24 ? [e.slice(0, i), e.slice(i + 2)] : ['', e];
+};
 ---
 
 <Base title="Currículo" description={resumo.texto}>
@@ -42,8 +48,8 @@ const periodo = `${anos[0]} — ${anos[anos.length - 1]}`;
             <div class="terminal">
               <ul>
                 {j.entregas.map((e) => {
-                  const m = e.match(/^([^:]{2,24}):\s(.*)$/);
-                  return m ? <li><strong>{m[1]}</strong>: {m[2]}</li> : <li>{e}</li>;
+                  const [rotulo, texto] = separar(e);
+                  return rotulo ? <li><strong>{rotulo}</strong>: {texto}</li> : <li>{texto}</li>;
                 })}
                 {j.conquista && (
                   <li>{j.conquista.texto} ..... <span class="ok">{j.conquista.status}</span></li>
