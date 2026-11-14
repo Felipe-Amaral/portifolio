@@ -6,9 +6,11 @@ import TitleLockup from '../components/TitleLockup.astro';
 <Base title="404" description="Página não encontrada.">
   <section>
     <TitleLockup kicker="ERROR // 404" meta="ALVO FORA DO ESCOPO" lines={['NOT', 'FOUND']}>
-      <pre class="terminal terminal--pre a-flicker d10"><span class="cmd">$ curl -I {Astro.url.pathname}</span>
-HTTP/2 404
-[!] essa página não existe ou mudou de lugar</pre>
+      <div class="terminal a-flicker d10">
+        <div class="ln cmd">$ curl -I {Astro.url.pathname}</div>
+        <div class="ln">HTTP/2 404</div>
+        <div class="ln">[!] essa página não existe ou mudou de lugar</div>
+      </div>
       <div class="row">
         <a class="btn btn--red" href="/">VOLTAR PARA HOME ▸</a>
         <a class="btn btn--line" href="/curriculo/">VER CURRÍCULO</a>
