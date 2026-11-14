@@ -14,7 +14,7 @@ const links = [
   <span class="muted">{site.slogan}</span>
   <nav aria-label="Contato">
     {links.map((l) => (
-      <a href={l.href} rel={l.href.startsWith('http') ? 'me noopener' : undefined}>{l.label}</a>
+      <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel={l.href.startsWith('http') ? 'me noopener noreferrer' : undefined}>{l.label}</a>
     ))}
   </nav>
 </footer>
