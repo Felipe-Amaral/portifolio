@@ -26,8 +26,12 @@ const barra = (k: string) => '█'.repeat(Math.max(1, Math.round((contagem[k] / 
         </p>
       </TitleLockup>
     </div>
-    <pre class="terminal terminal--pre a-flicker d9" aria-label="Quantidade de cursos por área"><span class="cmd">$ du -sh ./cursos/*</span>
-{Object.keys(areasCursos).map((k) => <>{linhaDu(k)}<span class="red">{barra(k)}</span>{'\n'}</>)}</pre>
+    <div class="terminal a-flicker d9" role="group" aria-label="Quantidade de cursos por área">
+      <div class="ln cmd">$ du -sh ./cursos/&#42;</div>
+      {Object.keys(areasCursos).map((k) => (
+        <div class="ln">{linhaDu(k)}<span class="red">{barra(k)}</span></div>
+      ))}
+    </div>
   </section>
 
   <section aria-labelledby="lista" class="stack" data-filter>
