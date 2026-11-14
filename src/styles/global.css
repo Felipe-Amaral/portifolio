@@ -170,6 +170,7 @@ a.card:hover { border-color: var(--red); color: var(--ink); }
   font-size: 15px; line-height: 24px; color: var(--ink-muted);
 }
 .terminal--pre { white-space: pre; overflow-x: auto; }
+.terminal:has(.ln) { overflow-x: auto; }
 .terminal .cmd { color: var(--cyan); }
 .terminal ul { list-style: none; margin: 0; padding: 0; }
 .terminal li::before { content: '[+] '; }
@@ -213,7 +214,7 @@ a.card:hover { border-color: var(--red); color: var(--ink); }
 .meter__bars b { width: 10px; height: 12px; background: var(--meter-off); }
 .meter__bars b.on { background: var(--red); }
 .photo .terminal { position: absolute; left: 6%; right: 6%; bottom: 6%; min-height: 148px; overflow: hidden; }
-[data-line] { white-space: pre; }
+[data-line], .ln { white-space: pre; }
 .cursor { color: var(--red); animation: rt-blink 1s steps(1) infinite; }
 
 /* ---------- currículo ---------- */
