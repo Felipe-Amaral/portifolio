@@ -364,6 +364,11 @@ a.card:hover { border-color: var(--red); color: var(--ink); }
 .a-lock { animation: rt-lock 420ms var(--ease-lock) both; }
 .a-lit { animation: rt-lit 60ms steps(1) both; }
 .a-sweep { animation: rt-sweep 700ms linear both; }
+/* Foto do hero: enquanto não está na tela (.is-wait sem .is-live, ver scripts/photo.ts), nada anima. */
+.photo.is-wait:not(.is-live) :is(.a-flicker, .a-sweep, .a-draw, .a-drawy, .a-lock, .a-lit, .a-wipe) {
+  animation: none;
+  visibility: hidden;
+}
 .d1 { animation-delay: 60ms; } .d2 { animation-delay: 120ms; } .d3 { animation-delay: 180ms; } .d4 { animation-delay: 240ms; }
 .d5 { animation-delay: 300ms; } .d6 { animation-delay: 380ms; } .d7 { animation-delay: 450ms; } .d8 { animation-delay: 520ms; }
 .d9 { animation-delay: 600ms; } .d10 { animation-delay: 700ms; } .d11 { animation-delay: 800ms; } .d12 { animation-delay: 900ms; }

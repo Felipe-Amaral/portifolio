@@ -1,5 +1,7 @@
 // Boot sequence: o terminal "digita" as linhas (motion-type: 12 ms por caractere, início em 450 ms).
 // O HTML já vem com o texto completo; sem JavaScript ou com movimento reduzido, nada muda.
+import { onVisible } from './visible';
+
 const SPEED = 12;
 const START = 450;
 
@@ -45,7 +47,8 @@ document.querySelectorAll<HTMLElement>('[data-boot]').forEach((term) => {
     }
     if (i < parts.length) window.setTimeout(step, SPEED);
   };
-  window.setTimeout(step, START);
+  // Só começa a digitar quando o terminal entra na tela (no mobile ele pode estar abaixo da dobra).
+  onVisible(term, () => window.setTimeout(step, START));
 });
 
 export {};
