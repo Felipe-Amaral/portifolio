@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  video: CollectionEntry<'videos'>;
+  filtro?: boolean;
+}
+const { video, filtro = false } = Astro.props;
+const v = video.data;
+const href = `https://www.youtube.com/watch?v=${v.youtube}`;
+---
+
+<a
+  class="video-card"
+  href={href}
+  rel="noopener"
+  data-filter-item={filtro ? '' : undefined}
+  data-area={filtro ? v.serie : undefined}
+  data-reveal
+>
+  <div class="thumb">
+    <img src={`https://i.ytimg.com/vi/${v.youtube}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
+    <span class="play" aria-hidden="true">▶</span>
+    <span class="lock" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span class="thumb__meta thumb__serie">{v.serie}</span>
+    {v.duracao && <span class="thumb__meta thumb__dur">{v.duracao}</span>}
+  </div>
+  <strong>{v.titulo}</strong>
+  <span class="small muted">EP. {String(v.episodio).padStart(2, '0')}{v.artigo ? ' // + ARTIGO' : ''}</span>
+</a>

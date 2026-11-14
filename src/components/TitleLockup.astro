@@ -1,0 +1,24 @@
+---
+// Assinatura da identidade: kicker + título em 2 linhas (última em vermelho) + barra.
+interface Props {
+  kicker: string;
+  meta?: string;
+  lines: [string, string];
+  bar?: string;
+  as?: 'h1' | 'h2';
+}
+const { kicker, meta, lines, bar, as: Tag = 'h1' } = Astro.props;
+---
+
+<div class="stack">
+  <div class="stack-sm a-wipe d2">
+    <span class="kicker">{kicker}</span>
+    {meta && <span class="meta">{meta}</span>}
+  </div>
+  <Tag class="title a-glitch d6">
+    <span>{lines[0]}</span>
+    <span>{lines[1]}</span>
+  </Tag>
+  {bar && <span class="label-bar a-wipe d8">{bar}</span>}
+  <slot />
+</div>

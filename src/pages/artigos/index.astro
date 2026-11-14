@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import TitleLockup from '../../components/TitleLockup.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { artigos } from '../../lib/colecoes';
+
+const lista = await artigos();
+---
+
+<Base title="Artigos" description="Artigos sobre decisões de arquitetura, confiabilidade e segurança, escritos a partir de problemas reais.">
+  <section>
+    <TitleLockup kicker="FIELD NOTES // ARTIGOS" meta={`${lista.length} PUBLICADOS`} lines={['FIELD', 'NOTES']} bar="ARQUITETURA NO DIA A DIA">
+      <p class="lead a-flicker d10">
+        Decisões de arquitetura no formato ADR, incidentes e o olhar de quem tenta quebrar o sistema. Cada artigo parte de um problema real.
+      </p>
+    </TitleLockup>
+  </section>
+
+  {lista.length ? (
+    <section aria-label="Artigos" class="grid">{lista.map((a) => <ArticleCard artigo={a} />)}</section>
+  ) : (
+    <p class="empty">[~] primeiro artigo ..... em preparação</p>
+  )}
+</Base>

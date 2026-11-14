@@ -1,0 +1,41 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { casos } from '../../lib/colecoes';
+
+export async function getStaticPaths() {
+  return (await casos()).map((caso) => ({ params: { id: caso.id }, props: { caso } }));
+}
+
+const { caso } = Astro.props;
+const { Content } = await render(caso);
+const c = caso.data;
+const passos = [
+  ['01 // PROBLEMA', c.problema],
+  ['02 // RESTRIÇÕES', c.restricoes],
+  ['03 // DECISÃO', c.decisao],
+  ['04 // RESULTADO', c.resultado],
+];
+---
+
+<Base title={c.titulo} description={c.resumo} type="article">
+  <section class="stack">
+    <a class="more" href="/portfolio/">◂ VOLTAR AO PORTFÓLIO</a>
+    <span class="kicker a-wipe d2">CASE FILE // {c.area}</span>
+    <h1 class="title title--long a-glitch d4"><span>{c.titulo}</span></h1>
+    <p class="lead a-flicker d8">{c.resumo}</p>
+  </section>
+
+  <section aria-label="Resumo do caso" class="case-hero">
+    {passos.map(([rotulo, texto], i) => (
+      <div class={`case-hero__step a-wipe d${10 + i * 2}`}>
+        <b>{rotulo}</b>
+        <p>{texto}</p>
+      </div>
+    ))}
+  </section>
+
+  <article class="prose">
+    <Content />
+  </article>
+</Base>

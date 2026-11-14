@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import TitleLockup from '../../components/TitleLockup.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import { casos } from '../../lib/colecoes';
+
+const lista = await casos();
+const destaque = lista.find((c) => c.data.destaque) ?? lista[0];
+const demais = lista.filter((c) => c !== destaque);
+const areas = ['ARQUITETURA', 'DEVOPS', 'SRE', 'SECURITY'];
+const passos = destaque
+  ? [
+      ['01 // PROBLEMA', destaque.data.problema],
+      ['02 // RESTRIÇÕES', destaque.data.restricoes],
+      ['03 // DECISÃO', destaque.data.decisao],
+      ['04 // RESULTADO', destaque.data.resultado],
+    ]
+  : [];
+---
+
+<Base title="Portfólio" description="Estudos de caso: problemas reais de arquitetura, as restrições, as decisões e os resultados.">
+  <section>
+    <TitleLockup kicker="CASE FILES // PORTFÓLIO" meta="PROBLEMA // RESTRIÇÕES // DECISÃO // RESULTADO" lines={['CASE', 'FILES']} bar="PROBLEMAS REAIS, DECISÕES REAIS">
+      <p class="lead a-flicker d10">
+        Cada caso conta um problema que eu enfrentei, o que limitava as opções, o que eu decidi e o que aconteceu depois. Dados sensíveis de clientes
+        ficam de fora.
+      </p>
+    </TitleLockup>
+  </section>
+
+  {destaque ? (
+    <section aria-label="Caso em destaque" class="case-hero">
+      <div class="case-hero__head">
+        <div class="stack-sm">
+          <span class="small cyan">CASE FILE #01 // DESTAQUE</span>
+          <h2>{destaque.data.titulo}</h2>
+        </div>
+        <span class="tag">{destaque.data.area}</span>
+      </div>
+      {passos.map(([rotulo, texto], i) => (
+        <div class={`case-hero__step a-wipe d${10 + i * 2}`}>
+          <b>{rotulo}</b>
+          <p>{texto}</p>
+        </div>
+      ))}
+      <div class="case-hero__foot">
+        <span class="small muted">[+] lição ..... <span class="ok">APRENDIDA</span></span>
+        <a class="more" href={`/portfolio/${destaque.id}/`}>LER O CASO COMPLETO ▸</a>
+      </div>
+    </section>
+  ) : (
+    <p class="empty">[~] primeiro estudo de caso ..... em preparação</p>
+  )}
+
+  {demais.length > 0 && (
+    <section aria-labelledby="todos" class="stack" data-filter>
+      <SectionHead id="todos" title="ARCHIVE // TODOS OS CASOS">
+        <div class="row" role="group" aria-label="Filtrar por área">
+          <button class="chip" type="button" data-filter-btn="*" aria-pressed="true">TODOS</button>
+          {areas.map((a) => <button class="chip" type="button" data-filter-btn={a} aria-pressed="false">{a}</button>)}
+        </div>
+      </SectionHead>
+      <div class="grid">
+        {demais.map((c, i) => (
+          <a class="card" href={`/portfolio/${c.id}/`} data-filter-item data-area={c.data.area} data-reveal>
+            <span class="row small"><span class="cyan">CASE FILE #{String(i + 2).padStart(2, '0')}</span><span class="tag">{c.data.area}</span></span>
+            <h3>{c.data.titulo}</h3>
+            <p>{c.data.resumo}</p>
+            <span class="small cyan">ABRIR ARQUIVO ▸</span>
+          </a>
+        ))}
+      </div>
+      <p class="empty" data-filter-empty hidden>[!] nenhum caso nessa área ainda</p>
+    </section>
+  )}
+</Base>
+
+<script>
+  import '../../scripts/filter';
+</script>

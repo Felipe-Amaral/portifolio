@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import TitleLockup from '../components/TitleLockup.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { cursos } from '../lib/colecoes';
+import { areasCursos } from '../data/curriculo';
+
+const lista = await cursos();
+const total = lista.length;
+const anos = lista.map((c) => c.data.data.slice(0, 4)).sort();
+const contagem = Object.fromEntries(Object.keys(areasCursos).map((k) => [k, lista.filter((c) => c.data.area === k).length]));
+const maior = Math.max(...Object.values(contagem));
+const linhaDu = (k: string) =>
+  `${String(contagem[k]).padStart(3, ' ')}  ${areasCursos[k].toLowerCase().padEnd(25, ' ')}`;
+const barra = (k: string) => '█'.repeat(Math.max(1, Math.round((contagem[k] / maior) * 16)));
+---
+
+<Base title="Training Log" description={`Registro dos ${total} cursos livres de Felipe Rigler, de ${anos[0]} a ${anos[anos.length - 1]}.`}>
+  <section class="split split--end">
+    <div class="split__main">
+      <a class="more" href="/curriculo/">◂ VOLTAR AO CURRÍCULO</a>
+      <TitleLockup kicker={`TRAINING LOG // ${total} CURSOS`} meta={`CURSOS LIVRES // ${anos[0]} — ${anos[anos.length - 1]}`} lines={['TRAINING', 'LOG']}>
+        <p class="lead a-flicker d10">
+          Registro dos cursos livres que fiz desde {anos[0]}. Estudar não é o mesmo que usar em produção: o que aplico no trabalho está nas
+          <a href="/curriculo/#competencias">competências do currículo</a>.
+        </p>
+      </TitleLockup>
+    </div>
+    <pre class="terminal terminal--pre a-flicker d9" aria-label="Quantidade de cursos por área"><span class="cmd">$ du -sh ./cursos/*</span>
+{Object.keys(areasCursos).map((k) => <>{linhaDu(k)}<span class="red">{barra(k)}</span>{'\n'}</>)}</pre>
+  </section>
+
+  <section aria-labelledby="lista" class="stack" data-filter>
+    <SectionHead id="lista" title="ARCHIVE // TODOS OS CURSOS" />
+    <div class="search">
+      <label for="busca">$ grep</label>
+      <input id="busca" type="search" placeholder="buscar curso ou instituição" autocomplete="off" data-filter-search />
+    </div>
+    <div class="row" role="group" aria-label="Filtrar por área">
+      <button class="chip" type="button" data-filter-btn="*" aria-pressed="true">TODOS {total}</button>
+      {Object.entries(areasCursos).map(([k, label]) => (
+        <button class="chip" type="button" data-filter-btn={k} aria-pressed="false">{label} {contagem[k]}</button>
+      ))}
+    </div>
+    <span class="small muted">[+] <span data-filter-count data-one="curso" data-many="cursos">{total} cursos</span></span>
+    <ul class="log">
+      {lista.map((c) => (
+        <li data-filter-item data-area={c.data.area} data-text={`${c.data.nome} ${c.data.instituicao}`}>
+          <span class="log__date">{c.data.data}</span>
+          <span class="log__area">{areasCursos[c.data.area]}</span>
+          <span class="log__name">{c.data.nome}</span>
+          <span class="log__inst">{c.data.instituicao}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="empty" data-filter-empty hidden>[!] nenhum curso encontrado para essa busca</p>
+  </section>
+</Base>
+
+<script>
+  import '../scripts/filter';
+</script>

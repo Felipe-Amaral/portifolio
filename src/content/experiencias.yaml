@@ -1,0 +1,130 @@
+# Experiências profissionais. Cada item precisa de um "id" único.
+# "ordem": 1 aparece primeiro. "atual: true" acende o marcador vermelho.
+
+- id: oktor
+  ordem: 1
+  atual: true
+  cargo: Engenheiro de Software Sênior
+  empresa: Oktor Telecom
+  periodo: MAI 2025 — ATUAL
+  duracao: 1 ANO 7 MESES
+  modelo: HÍBRIDO
+  papel: ARQUITETURA DE SOLUÇÕES // LIDERANÇA TÉCNICA
+  contexto: Sistemas corporativos de telecomunicações. Responsável pelo desenvolvimento integral de duas plataformas, do levantamento de requisitos à implementação.
+  entregas:
+    - "Kairos: bilhetagem e tarifação, com ingestão de CDRs, processamento assíncrono, regras complexas de cobrança, integrações e dashboards."
+    - "Hermes: mensageria SMS/RCS, com campanhas, APIs, filas, webhooks, BI operacional, consolidação financeira e controles de segurança."
+    - "Kronos e bilhetagem legada: correção de race conditions, idempotência, observabilidade e otimização de processamento."
+    - "Code review, orientação do time e decisões de arquitetura; desenvolvimento com agentes de IA guiado por especificações no estilo RFC."
+  stack: [PHP, Laravel, PostgreSQL, MySQL, Redis, Horizon, Tailwind, Docker, Nginx, GitHub Actions, On-premises]
+
+- id: eyecare
+  ordem: 2
+  cargo: Engenheiro de Software Sênior
+  empresa: Eyecare Health
+  periodo: MAI 2023 — JAN 2025
+  duracao: 1 ANO 9 MESES
+  modelo: REMOTO
+  contexto: Eyecare BI, SaaS de gestão para clínicas e hospitais oftalmológicos, que integra processos assistenciais, administrativos e financeiros com indicadores para decisão.
+  entregas:
+    - Integrações financeiras e fiscais com serviços externos, incluindo emissão de nota fiscal eletrônica.
+    - Módulos e APIs REST em PHP, Laravel e PostgreSQL, com interfaces em Vue.js.
+    - Do refinamento com o Product Owner à entrega, com Clean Architecture, Design Patterns e PSR.
+  stack: [PHP, Laravel, PostgreSQL, Vue.js, APIs REST, NF-e, Docker, GitFlow, Bitbucket]
+
+- id: corbee
+  ordem: 3
+  cargo: Engenheiro de Software Sênior
+  empresa: Corbee
+  periodo: JUL 2022 — ABR 2023
+  duracao: 10 MESES
+  modelo: REMOTO
+  contexto: J17Bank, plataforma de banco digital com oferta de serviços financeiros.
+  entregas:
+    - Módulos financeiros, com destaque para o pagamento de boletos bancários.
+    - Processamento assíncrono com filas e RabbitMQ para executar tarefas e integrar componentes.
+    - Evolução da arquitetura existente com SOLID, DDD e padrões PSR, coberta por testes unitários, de integração e E2E.
+  stack: [PHP, Laravel, MySQL, RabbitMQ, APIs REST, Testes E2E, Sistemas financeiros]
+
+- id: bionexo
+  ordem: 4
+  cargo: Engenheiro de Software Sênior
+  empresa: Bionexo
+  periodo: JUL 2021 — JUN 2022
+  duracao: 1 ANO
+  modelo: REMOTO
+  contexto: PlannexoWeb, SaaS de planejamento inteligente de compras e gestão de estoques para instituições de saúde, baseado em histórico de consumo e políticas de reposição.
+  entregas:
+    - Módulos de estoque, previsão de consumo, planejamento de reposição e sugestão de compras.
+    - APIs REST documentadas com Swagger, filas e rotinas de processamento em background.
+    - Regras de negócio organizadas com DDD, cobertas por testes unitários, de integração e de API com PHPUnit.
+  stack: [PHP, Laravel, PostgreSQL, Oracle, Filas, PHPUnit, Swagger, Docker, GitFlow]
+
+- id: total-express
+  ordem: 5
+  cargo: Engenheiro de Software Sênior
+  empresa: Total Express
+  periodo: JUN 2019 — JUN 2021
+  duracao: 2 ANOS 1 MÊS
+  modelo: REMOTO
+  contexto: Logística para e-commerce, com integrações entre plataformas de venda e sistemas corporativos. Trabalho em squads ágeis.
+  entregas:
+    - "Modernização do ecossistema: evolução de monólitos em PHP 7.x para serviços e microsserviços em Laravel com Docker."
+    - APIs REST e integrações entre as aplicações e a operação logística.
+    - "Qualidade no pipeline: CI validando padrões PSR e complexidade ciclomática, com SOLID e DDD no código."
+  stack: [PHP 7.x, Laravel, MySQL, Docker, CI/CD, DDD, Microsserviços, Bitbucket]
+
+- id: busca-legal
+  ordem: 6
+  cargo: Engenheiro de Software Sênior
+  empresa: Busca Legal
+  periodo: MAR 2017 — ABR 2019
+  duracao: 2 ANOS 2 MESES
+  modelo: PRESENCIAL
+  contexto: LegalTech de inteligência tributária que usa IA e grandes bases de regras fiscais para consultas, classificação tributária e tomada de decisão.
+  entregas:
+    - "Construção da plataforma do requisito à entrega: backend PHP, PostgreSQL, modelagem de dados e arquitetura."
+    - Integrações com Algar Telecom e com a Vindi (pagamentos) via APIs REST, OAuth 2.0 e Swagger.
+  conquista:
+    texto: IBM Watson Build Challenge 2017, etapa LATAM
+    status: VENCEDORA
+  stack: [PHP, PostgreSQL, APIs REST, OAuth 2.0, Swagger, IBM Watson, UML, Scrum/Kanban]
+
+- id: nexus
+  ordem: 7
+  cargo: Engenheiro de Software Sênior
+  empresa: Nexus Saúde
+  periodo: ABR 2016 — JAN 2017
+  duracao: 10 MESES
+  modelo: PRESENCIAL
+  contexto: Plataforma de gestão em saúde ocupacional em PHP/Laravel e PostgreSQL, hospedada na AWS EC2.
+  entregas:
+    - Módulos de exames médicos, prontuários, ambulatório, absenteísmo e afastamentos.
+    - Integrações com o SOC e integrações analíticas com Power BI.
+  stack: [PHP, Laravel, PostgreSQL, AWS, Design de banco de dados, Padrões de projeto]
+
+- id: engemed
+  ordem: 8
+  cargo: Engenheiro de Software
+  empresa: Engemed Saúde Ocupacional
+  periodo: ABR 2015 — FEV 2016
+  duracao: 11 MESES
+  modelo: PRESENCIAL
+  contexto: Sistema em PHP para saúde ocupacional e documentação de medicina do trabalho.
+  entregas:
+    - Geração, indexação e gestão de ASOs e documentos relacionados.
+    - Integrações SOAP e REST com o SOC, automatizando processos da operação.
+  stack: [PHP, Laravel, IBM Db2, MySQL, SOAP/REST, Linux]
+
+- id: hp
+  ordem: 9
+  cargo: Engenheiro de Software Júnior
+  empresa: HP
+  periodo: JAN 2013 — FEV 2015
+  duracao: 2 ANOS 2 MESES
+  modelo: PRESENCIAL
+  contexto: Plataforma B2B que conecta revendedores e fornecedores da América Latina, com foco no backend.
+  entregas:
+    - Modernização do sistema de PHP puro para Laravel 5 com SQL Server.
+    - Evolução da interface de HTML/CSS para Bootstrap 2 e 3; MVC, refatoração de legado e Clean Code.
+  stack: [PHP, Laravel, SQL Server, MySQL, Git, Linux]

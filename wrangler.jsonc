@@ -1,0 +1,11 @@
+// Cloudflare Workers com Static Assets: o site é 100% estático,
+// então não existe código de Worker. A Cloudflare só serve a pasta dist/.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "feliperigler",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

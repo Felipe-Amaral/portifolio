@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import TitleLockup from '../components/TitleLockup.astro';
+import SectionHead from '../components/SectionHead.astro';
+import VideoCard from '../components/VideoCard.astro';
+import { videos } from '../lib/colecoes';
+import { site } from '../data/site';
+
+const lista = await videos();
+const [destaque, ...demais] = lista;
+const series = ['ARQUITETURA AO VIVO', 'INCIDENT REPORT', 'RED TEAM VIEW'];
+---
+
+<Base title="Vídeos" description="Vídeos sobre arquitetura na prática: desenho de sistemas, incidentes reais e revisão com olhos de red team.">
+  <section class="hero">
+    <TitleLockup kicker="DEBRIEF // VÍDEOS" meta={destaque ? `EPISÓDIO ${String(destaque.data.episodio).padStart(2, '0')}` : 'PRIMEIRO EPISÓDIO EM BREVE'} lines={['LIVE', 'DEBRIEF']} bar="ARQUITETURA NA PRÁTICA">
+      <p class="lead a-flicker d10">Eu desenho, explico e erro na frente da câmera. Cada vídeo tem um artigo com o diagrama e as decisões por escrito.</p>
+    </TitleLockup>
+    {destaque ? (
+      <div class="stack">
+        <div class="embed">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${destaque.data.youtube}`}
+            title={`Vídeo: ${destaque.data.titulo}`}
+            loading="lazy"
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <strong>{destaque.data.titulo}</strong>
+        {destaque.data.artigo && <a class="more" href={`/artigos/${destaque.data.artigo}/`}>LER O ARTIGO ▸</a>}
+      </div>
+    ) : (
+      <div class="photo">
+        <i class="photo__sweep a-sweep d9" aria-hidden="true"></i>
+        <span class="corners corners--sm" aria-hidden="true"><i class="a-draw d4"></i><i class="a-draw d5"></i><i class="a-draw d6"></i><i class="a-draw d7"></i></span>
+        <div class="terminal">
+          <div data-line class="cmd">$ ./record --ep 01</div>
+          <div data-line>[~] gravando primeiro episódio</div>
+          <div data-line>[+] status ..... <span class="ok">EM BREVE</span></div>
+        </div>
+      </div>
+    )}
+  </section>
+
+  {demais.length > 0 && (
+    <section aria-labelledby="todos" class="stack" data-filter>
+      <SectionHead id="todos" title="SERIES // TODOS OS VÍDEOS">
+        <div class="row" role="group" aria-label="Filtrar por série">
+          <button class="chip" type="button" data-filter-btn="*" aria-pressed="true">TODOS</button>
+          {series.map((s) => <button class="chip" type="button" data-filter-btn={s} aria-pressed="false">{s}</button>)}
+        </div>
+      </SectionHead>
+      <div class="grid">{demais.map((v) => <VideoCard video={v} filtro />)}</div>
+      <p class="empty" data-filter-empty hidden>[!] nenhum vídeo nessa série ainda</p>
+    </section>
+  )}
+
+  {site.links.youtube && (
+    <section class="card row row--between" data-reveal>
+      <div class="stack-sm">
+        <strong>Novos episódios no canal.</strong>
+        <span class="small muted">Inscreva-se para receber o próximo.</span>
+      </div>
+      <a class="btn btn--red" href={site.links.youtube} rel="me noopener">INSCREVER NO YOUTUBE ▸</a>
+    </section>
+  )}
+</Base>
+
+<script>
+  import '../scripts/filter';
+</script>

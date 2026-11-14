@@ -1,0 +1,12 @@
+# Vídeos do YouTube. Para publicar um vídeo, apague o "[]" abaixo e adicione itens assim:
+#
+# - id: ep01
+#   titulo: Desenhando uma arquitetura multi-região do zero
+#   youtube: dQw4w9WgXcQ          # só o ID que aparece depois de "watch?v=" no link
+#   serie: ARQUITETURA AO VIVO    # ARQUITETURA AO VIVO | INCIDENT REPORT | RED TEAM VIEW
+#   episodio: 1
+#   data: 2026-12-01
+#   duracao: "18:42"
+#   artigo: monolito-ou-microsservicos   # opcional: nome do arquivo do artigo, sem .md
+
+[]

@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import TitleLockup from '../components/TitleLockup.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import VideoCard from '../components/VideoCard.astro';
+import { artigos, videos } from '../lib/colecoes';
+
+const ultimosArtigos = (await artigos()).slice(0, 3);
+const ultimosVideos = (await videos()).slice(0, 3);
+
+const frentes = [
+  { n: '01', titulo: 'ARQUITETURA', texto: 'Software e soluções: decisões registradas, trade-offs explícitos e desenhos que o time consegue manter.' },
+  { n: '02', titulo: 'DEVOPS', texto: 'Pipelines de CI/CD, infraestrutura e deploys que não dependem de coragem.' },
+  { n: '03', titulo: 'SRE', texto: 'Idempotência, concorrência, observabilidade e resposta a incidentes, com postmortem sem culpados.' },
+  { n: '04', titulo: 'DEVSECOPS // RED TEAM', texto: 'Segurança pensada no desenho: controle de acesso, auditoria e o olhar de quem tenta quebrar.' },
+];
+---
+
+<Base>
+  <section class="hero">
+    <TitleLockup kicker="WHOAMI // ARCHITECT" meta="ENGENHARIA // ARQUITETURA // DEVOPS // SRE // DEVSECOPS" lines={['FELIPE', 'RIGLER']} bar="SOFTWARE & SOLUTION ARCHITECT">
+      <p class="lead a-flicker d10">
+        Projeto sistemas pensando em como eles vão falhar e em como vão ser atacados. Aqui eu mostro, com casos reais, como resolvo problemas de
+        arquitetura do dia a dia.
+      </p>
+      <div class="row a-flicker d11">
+        <a class="btn btn--red" href="/curriculo/">VER CURRÍCULO ▸</a>
+        <a class="btn btn--line" href="/artigos/">LER ARTIGOS</a>
+      </div>
+    </TitleLockup>
+
+    <div class="photo">
+      <img class="a-flicker d5" src="/images/felipe-hero.jpg" alt="Felipe Rigler sorrindo, em tratamento duotone vermelho" width="960" height="1200" fetchpriority="high" />
+      <i class="photo__sweep a-sweep d9" aria-hidden="true"></i>
+      <span class="corners" aria-hidden="true"><i class="a-draw"></i><i class="a-draw d1"></i><i class="a-draw d2"></i><i class="a-draw d3"></i></span>
+      <span class="target a-lock d12" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      <span class="id-tag a-wipe d15" aria-hidden="true">ID: DEV &gt;&gt; ARCHITECT</span>
+      <div class="meter a-flicker d14" aria-hidden="true">
+        <div class="meter__label">UPTIME</div>
+        <div class="meter__value">+1% / DIA</div>
+        <div class="meter__bars"><b class="on a-lit d15"></b><b class="on a-lit d16"></b><b class="on a-lit d16"></b><b></b><b></b><b></b><b></b><b></b></div>
+      </div>
+      <div class="terminal a-flicker d6" data-boot aria-label="whoami: arquiteto de software; stack: cloud, devops, sre, sec; sistemas resilientes">
+        <div data-line class="cmd">$ whoami</div>
+        <div data-line>arquiteto de software</div>
+        <div data-line class="cmd">$ cat stack.txt</div>
+        <div data-line>cloud // devops // sre // sec</div>
+        <div data-line>[+] sistemas ........ <span class="ok">RESILIENTES</span><span class="cursor" aria-hidden="true">▌</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="frentes" class="stack">
+    <SectionHead id="frentes" title="SCOPE // O QUE EU FAÇO" meta="QUATRO FRENTES, UM MESMO SISTEMA" />
+    <div class="grid grid--4">
+      {frentes.map((f) => (
+        <div class="card" data-reveal>
+          <span class="cyan">$ {f.n}</span>
+          <h3>{f.titulo}</h3>
+          <p>{f.texto}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section aria-labelledby="artigos" class="stack">
+    <SectionHead id="artigos" title="FIELD NOTES // ARTIGOS" meta="COMO EU RESOLVO, PASSO A PASSO" more={ultimosArtigos.length ? { href: '/artigos/', label: 'TODOS OS ARTIGOS' } : undefined} />
+    {ultimosArtigos.length ? (
+      <div class="grid">{ultimosArtigos.map((a) => <ArticleCard artigo={a} />)}</div>
+    ) : (
+      <p class="empty" data-reveal>[~] primeiro artigo ..... em preparação</p>
+    )}
+  </section>
+
+  <section aria-labelledby="videos" class="stack">
+    <SectionHead id="videos" title="DEBRIEF // VÍDEOS" meta="ARQUITETURA DESENHADA AO VIVO" more={ultimosVideos.length ? { href: '/videos/', label: 'TODOS OS VÍDEOS' } : undefined} />
+    {ultimosVideos.length ? (
+      <div class="grid">{ultimosVideos.map((v) => <VideoCard video={v} />)}</div>
+    ) : (
+      <p class="empty" data-reveal>[~] primeiro episódio ..... em preparação</p>
+    )}
+  </section>
+</Base>
+
+<script>
+  import '../scripts/boot';
+</script>

@@ -1,0 +1,20 @@
+---
+import { site } from '../data/site';
+
+const { linkedin, github, youtube, email } = site.links;
+const links = [
+  { href: linkedin, label: 'LINKEDIN' },
+  { href: github, label: 'GITHUB' },
+  { href: youtube, label: 'YOUTUBE' },
+  { href: email ? `mailto:${email}` : '', label: 'E-MAIL' },
+].filter((l) => l.href);
+---
+
+<footer class="site-footer">
+  <span class="muted">{site.slogan}</span>
+  <nav aria-label="Contato">
+    {links.map((l) => (
+      <a href={l.href} rel={l.href.startsWith('http') ? 'me noopener' : undefined}>{l.label}</a>
+    ))}
+  </nav>
+</footer>

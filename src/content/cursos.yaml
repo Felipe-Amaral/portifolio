@@ -1,0 +1,701 @@
+# Cursos livres (Training Log). Cada item precisa de um "id" único.
+# area: backend | ia | soft | frontend | arquitetura | dados | devops | outros
+# destaque: true -> aparece no currículo (use "rotulo" para outro nome no destaque).
+
+- id: c001
+  nome: "UML"
+  instituicao: "Udemy"
+  data: "2026-04"
+  area: arquitetura
+
+- id: c002
+  nome: "AWS"
+  instituicao: "Udemy"
+  data: "2026-04"
+  area: devops
+  destaque: true
+
+- id: c003
+  nome: "Docker"
+  instituicao: "Udemy"
+  data: "2026-04"
+  area: devops
+  destaque: true
+
+- id: c004
+  nome: "Golang"
+  instituicao: "Udemy"
+  data: "2026-04"
+  area: backend
+  destaque: true
+
+- id: c005
+  nome: "React e Redux"
+  instituicao: "Udemy"
+  data: "2026-04"
+  area: frontend
+
+- id: c006
+  nome: "Fundamentos da Comunicação"
+  instituicao: "LinkedIn"
+  data: "2026-04"
+  area: soft
+
+- id: c007
+  nome: "Como Usar a Inteligência Artificial para Aumentar seu Bem-Estar"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c008
+  nome: "Fundamentos da Comunicação Não-Violenta"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c009
+  nome: "Pensamento Crítico"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c010
+  nome: "Como Desenvolver sua Automotivação para Objetivos"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c011
+  nome: "Dicas de 1 Minuto para Recuperar seu Equilíbrio Emocional"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c012
+  nome: "Hábitos de 1 Minuto para Fortalecer sua Inteligência Emocional"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c013
+  nome: "Como Liderar Usando a sua Intuição"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c014
+  nome: "Como Usar a Curiosidade para Crescer e se Destacar"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c015
+  nome: "Como Construir Confiança"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c016
+  nome: "Como Influenciar os Outros"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c017
+  nome: "Os Dez Fundamentos da Influência e Persuasão"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c018
+  nome: "FluêncIA: A Evolução das Buscas Online com o Copilot Chat"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c019
+  nome: "FluêncIA: Como Ser Mais Produtivo Usando o Copilot Chat"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c020
+  nome: "Fundamentos de HTTP para Desenvolvedores"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: arquitetura
+
+- id: c021
+  nome: "Como se Adaptar e Reinventar em Tempos de Incerteza e Transformação"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c022
+  nome: "Networking: Como Criar uma Rede de Contatos Profissionais"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c023
+  nome: "Como Ser o Gerente que Todos Desejam Seguir"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c024
+  nome: "Dicas de 1 Minuto de Comunicação Não-Violenta"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c025
+  nome: "IA-900: Visão Computacional"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c026
+  nome: "IA-900: Processamento de Linguagem Natural"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c027
+  nome: "FluêncIA: Copilot"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c028
+  nome: "FluêncIA: Inteligência Artificial Generativa"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c029
+  nome: "FluêncIA: Ética em IA"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c030
+  nome: "FluêncIA: A Evolução das Buscas Online"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c031
+  nome: "Soluções de IA no GitHub: Primeiros Passos no Codespaces"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c032
+  nome: "IA-900: Visão Geral da IA Generativa e Casos de Uso"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c033
+  nome: "FluêncIA: Como Escrever Bons Prompts com o Copilot"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c034
+  nome: "FluêncIA: A História da Inteligência Artificial"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c035
+  nome: "FluêncIA: Inteligência Artificial Generativa"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c036
+  nome: "Como Acelerar o Trabalho Remoto com Inteligência Artificial"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c037
+  nome: "Como Aproveitar ao Máximo a IA para Otimizar a sua Marca Pessoal"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c038
+  nome: "FluêncIA: Ética em IA"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c039
+  nome: "Descubra a Inteligência Artificial Generativa"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c040
+  nome: "Como Aproveitar ao Máximo o Poder da Inteligência Social na Era da IA"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c041
+  nome: "Reinvente seu Trabalho e Carreira com Hacks de IA para Produtividade"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c042
+  nome: "Como Desenvolver seu Pensamento Crítico com o Potencial da IA Generativa"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: soft
+
+- id: c043
+  nome: "Prompt Engineering: Aprenda a Conversar com uma IA Generativa"
+  instituicao: "LinkedIn"
+  data: "2026-03"
+  area: ia
+
+- id: c044
+  nome: "Carreira na Era da IA: Um Guia para Líderes Empresariais"
+  instituicao: "LinkedIn"
+  data: "2026-02"
+  area: soft
+
+- id: c045
+  nome: "AWS Terraform"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: devops
+
+- id: c046
+  nome: "Machine Learning com Python"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: ia
+
+- id: c047
+  nome: "DevOps Professional"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: devops
+  destaque: true
+
+- id: c048
+  nome: "Machine Learning na Prática"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: ia
+
+- id: c049
+  nome: "ETL na Prática"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: dados
+
+- id: c050
+  nome: "Visualização de Dados com Python"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: dados
+
+- id: c051
+  nome: "Data Warehouse - Fundamentos e Implementação"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: dados
+
+- id: c052
+  nome: "SQL"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: dados
+
+- id: c053
+  nome: "C#"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: backend
+
+- id: c054
+  nome: "Programação Orientada a Objetos"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: arquitetura
+
+- id: c055
+  nome: "HTML5"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: frontend
+
+- id: c056
+  nome: "Big Data com Hadoop"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-02"
+  area: dados
+
+- id: c057
+  nome: "Lógica de Programação"
+  instituicao: "Impacta Tecnologia"
+  data: "2025-08"
+  area: backend
+
+- id: c058
+  nome: "PHP: evolua seu conhecimento e organize seu código"
+  instituicao: "Alura"
+  data: "2024-05"
+  area: backend
+
+- id: c059
+  nome: "PHP: criando sua aplicação"
+  instituicao: "Alura"
+  data: "2024-05"
+  area: backend
+
+- id: c060
+  nome: "Danielle Monteiro Responde Sobre Como Encontrar um Emprego na Área de TI"
+  instituicao: "LinkedIn"
+  data: "2024-04"
+  area: soft
+
+- id: c061
+  nome: "HTML e CSS: ambientes de desenvolvimento, estrutura de arquivos e tags"
+  instituicao: "Alura"
+  data: "2024-03"
+  area: frontend
+
+- id: c062
+  nome: "Startupismo: comece do jeito certo"
+  instituicao: "Alura"
+  data: "2023-09"
+  area: outros
+
+- id: c063
+  nome: "Refatoração em PHP: Boas práticas no seu código"
+  instituicao: "Alura"
+  data: "2021-06"
+  area: arquitetura
+
+- id: c064
+  nome: "PHP e Clean Architecture"
+  instituicao: "Alura"
+  data: "2021-06"
+  area: arquitetura
+  destaque: true
+
+- id: c065
+  nome: "Design patterns - Comportamentais"
+  instituicao: "School of Net"
+  data: "2021-06"
+  area: arquitetura
+  destaque: true
+  rotulo: "Design Patterns (3 módulos)"
+
+- id: c066
+  nome: "SOLID com PHP"
+  instituicao: "Alura"
+  data: "2021-06"
+  area: arquitetura
+  destaque: true
+
+- id: c067
+  nome: "Design patterns - Estruturais"
+  instituicao: "School of Net"
+  data: "2021-06"
+  area: arquitetura
+
+- id: c068
+  nome: "PHP com MVC"
+  instituicao: "School of Net"
+  data: "2021-06"
+  area: arquitetura
+
+- id: c069
+  nome: "Design patterns - Criacionais"
+  instituicao: "School of Net"
+  data: "2021-05"
+  area: arquitetura
+
+- id: c070
+  nome: "PHP FIG e PSRs"
+  instituicao: "School of Net"
+  data: "2020-02"
+  area: arquitetura
+
+- id: c071
+  nome: "PHP - Paradigma Procedural"
+  instituicao: "School of Net"
+  data: "2020-01"
+  area: backend
+
+- id: c072
+  nome: "PHP Procedural"
+  instituicao: "School of Net"
+  data: "2020-01"
+  area: backend
+
+- id: c073
+  nome: "PHP - Programação Orientado a Objetos"
+  instituicao: "School of Net"
+  data: "2020-01"
+  area: arquitetura
+
+- id: c074
+  nome: "Avançando com PHP e Formulários"
+  instituicao: "School of Net"
+  data: "2020-01"
+  area: backend
+
+- id: c075
+  nome: "PHP - Sessões e Cookies"
+  instituicao: "School of Net"
+  data: "2020-01"
+  area: backend
+
+- id: c076
+  nome: "PHP - Formulários"
+  instituicao: "School of Net"
+  data: "2020-01"
+  area: backend
+
+- id: c077
+  nome: "PHP - Avançando Programação Orientada a Objetos"
+  instituicao: "School of Net"
+  data: "2020-01"
+  area: arquitetura
+
+- id: c078
+  nome: "Go Lang"
+  instituicao: "School of Net"
+  data: "2019-11"
+  area: backend
+
+- id: c079
+  nome: "Javascript - Trabalhando com AJAX"
+  instituicao: "School of Net"
+  data: "2019-09"
+  area: frontend
+
+- id: c080
+  nome: "Javascript - Trabalhando com DOM"
+  instituicao: "School of Net"
+  data: "2019-09"
+  area: frontend
+
+- id: c081
+  nome: "Javascript - Arrays, Objetos, eventos e funções"
+  instituicao: "School of Net"
+  data: "2019-09"
+  area: frontend
+
+- id: c082
+  nome: "Javascript"
+  instituicao: "School of Net"
+  data: "2019-09"
+  area: frontend
+
+- id: c083
+  nome: "Marketing digital: Medindo os resultados do seu site"
+  instituicao: "Alura"
+  data: "2019-01"
+  area: outros
+
+- id: c084
+  nome: "Tipografia para web: trabalhe com fontes para compor páginas"
+  instituicao: "Alura"
+  data: "2019-01"
+  area: frontend
+
+- id: c085
+  nome: "Java II: Orientação a Objetos"
+  instituicao: "Alura"
+  data: "2019-01"
+  area: backend
+
+- id: c086
+  nome: "Java I: Primeiros passos"
+  instituicao: "Alura"
+  data: "2019-01"
+  area: backend
+
+- id: c087
+  nome: "WordPress: Primeiros passos para não programadores"
+  instituicao: "Alura"
+  data: "2019-01"
+  area: outros
+
+- id: c088
+  nome: "jQuery"
+  instituicao: "Alura"
+  data: "2018-06"
+  area: frontend
+
+- id: c089
+  nome: "PHP e MySQL"
+  instituicao: "Alura"
+  data: "2018-05"
+  area: backend
+
+- id: c090
+  nome: "Python na prática"
+  instituicao: "School of Net"
+  data: "2018-04"
+  area: backend
+
+- id: c091
+  nome: "Python"
+  instituicao: "School of Net"
+  data: "2018-04"
+  area: backend
+
+- id: c092
+  nome: "PHP Básico - v.2"
+  instituicao: "School of Net"
+  data: "2018-04"
+  area: backend
+
+- id: c093
+  nome: "PHP Básico - v.1"
+  instituicao: "School of Net"
+  data: "2018-04"
+  area: backend
+
+- id: c094
+  nome: "Sistema de Login com Redes Sociais no Laravel"
+  instituicao: "Udemy"
+  data: "2018-04"
+  area: backend
+
+- id: c095
+  nome: "Avançando com PHP"
+  instituicao: "School of Net"
+  data: "2018-04"
+  area: backend
+
+- id: c096
+  nome: "PHP - Modularização no Laravel"
+  instituicao: "School of Net"
+  data: "2018-03"
+  area: arquitetura
+
+- id: c097
+  nome: "Vue.js 2.0"
+  instituicao: "School of Net"
+  data: "2018-01"
+  area: frontend
+
+- id: c098
+  nome: "Tests e Deploy com Travis"
+  instituicao: "School of Net"
+  data: "2018-01"
+  area: devops
+
+- id: c099
+  nome: "CakePHP 3.5"
+  instituicao: "School of Net"
+  data: "2018-01"
+  area: backend
+
+- id: c100
+  nome: "Bootstrap 4"
+  instituicao: "School of Net"
+  data: "2018-01"
+  area: frontend
+
+- id: c101
+  nome: "Laravel - Eloquent ORM"
+  instituicao: "School of Net"
+  data: "2018-01"
+  area: backend
+
+- id: c102
+  nome: "Linux no terminal"
+  instituicao: "School of Net"
+  data: "2017-12"
+  area: devops
+
+- id: c103
+  nome: "Laravel II: Mais técnicas e webapps poderosas"
+  instituicao: "Alura"
+  data: "2017-09"
+  area: backend
+
+- id: c104
+  nome: "Laravel: facilitando o desenvolvimento PHP"
+  instituicao: "Alura"
+  data: "2017-07"
+  area: backend
+
+- id: c105
+  nome: "SQLServer I: desvendando o banco de dados"
+  instituicao: "Alura"
+  data: "2017-06"
+  area: dados
+
+- id: c106
+  nome: "Gulp: automação de tarefas front-end"
+  instituicao: "Alura"
+  data: "2017-05"
+  area: frontend
+
+- id: c107
+  nome: "UML Introdução: Modelagem de soluções"
+  instituicao: "Alura"
+  data: "2017-05"
+  area: arquitetura
+
+- id: c108
+  nome: "HTML5 e CSS3 I: Suas primeiras páginas da Web"
+  instituicao: "Alura"
+  data: "2017-03"
+  area: frontend
+
+- id: c109
+  nome: "HTML5 e CSS3 II"
+  instituicao: "Alura"
+  data: "2017-03"
+  area: frontend
+
+- id: c110
+  nome: "HTML e CSS"
+  instituicao: "Alura"
+  data: "2017-02"
+  area: frontend
+
+- id: c111
+  nome: "Concursos: noções básicas de informática"
+  instituicao: "Alura"
+  data: "2017-01"
+  area: outros
+
+- id: c112
+  nome: "Performance Web I: otimizando o front-end"
+  instituicao: "Alura"
+  data: "2017-01"
+  area: frontend
+
+- id: c113
+  nome: "PHP"
+  instituicao: "Impacta Tecnologia"
+  data: "2016-07"
+  area: backend
+
+- id: c114
+  nome: "MySQL"
+  instituicao: "Impacta Tecnologia"
+  data: "2016-05"
+  area: dados
+
+- id: c115
+  nome: "Lógica de Programação"
+  instituicao: "Impacta Tecnologia"
+  data: "2015-07"
+  area: backend

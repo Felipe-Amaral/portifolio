@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatarData, minutosDeLeitura } from '../lib/colecoes';
+
+interface Props {
+  artigo: CollectionEntry<'artigos'>;
+}
+const { artigo } = Astro.props;
+const a = artigo.data;
+---
+
+<a class="card" href={`/artigos/${artigo.id}/`} data-reveal>
+  <span class="tag">{a.tipo}</span>
+  <h3>{a.titulo}</h3>
+  <p>{a.descricao}</p>
+  <span class="small muted">{formatarData(a.data)} // {minutosDeLeitura(artigo.body)} MIN DE LEITURA</span>
+</a>

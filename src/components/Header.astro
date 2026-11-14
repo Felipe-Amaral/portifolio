@@ -1,0 +1,18 @@
+---
+import { nav, site } from '../data/site';
+
+const raw = Astro.url.pathname;
+const path = raw.endsWith('/') ? raw : `${raw}/`;
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const hoje = new Date().toISOString().slice(0, 10);
+---
+
+<header class="site-header">
+  <a class="brand a-wipe d1" href="/">▌{site.nome.toUpperCase()}</a>
+  <nav class="nav a-wipe d3" aria-label="Principal">
+    {nav.map((item) => (
+      <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+    ))}
+  </nav>
+  <span class="rec a-wipe d5"><span class="rec__dot" aria-hidden="true">●</span> REC {hoje}</span>
+</header>

@@ -1,0 +1,18 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  meta?: string;
+  more?: { href: string; label: string };
+}
+const { id, title, meta, more } = Astro.props;
+---
+
+<div class="section-head" data-reveal="wipe">
+  <div>
+    <h2 id={id}>{title}</h2>
+    {meta && <span class="meta">{meta}</span>}
+  </div>
+  {more && <a class="more" href={more.href}>{more.label} ▸</a>}
+  <slot />
+</div>

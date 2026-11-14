@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import TitleLockup from '../components/TitleLockup.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { experiencias, cursos } from '../lib/colecoes';
+import { resumo, formacao, competencias } from '../data/curriculo';
+import { site } from '../data/site';
+
+const jobs = await experiencias();
+const todosCursos = await cursos();
+const destaques = todosCursos.filter((c) => c.data.destaque);
+const anos = todosCursos.map((c) => c.data.data.slice(0, 4)).sort();
+const periodo = `${anos[0]} — ${anos[anos.length - 1]}`;
+---
+
+<Base title="Currículo" description={resumo.texto}>
+  <section class="split split--end">
+    <div class="split__main">
+      <TitleLockup kicker="SERVICE RECORD // CV" meta={site.nomeCompleto.toUpperCase()} lines={['SERVICE', 'RECORD']} bar={resumo.barra}>
+        <p class="lead a-flicker d10">{resumo.texto}</p>
+        <p class="muted a-flicker d11">{resumo.principio}</p>
+      </TitleLockup>
+    </div>
+    <div class="row a-flicker d12">
+      {site.curriculoPdf && <a class="btn btn--red" href={site.curriculoPdf} download>BAIXAR PDF ▸</a>}
+      <a class="btn btn--line" href={site.links.linkedin} rel="me noopener">LINKEDIN</a>
+    </div>
+  </section>
+
+  <div class="split">
+    <section aria-labelledby="exp" class="split__main stack">
+      <SectionHead id="exp" title="MISSIONS // EXPERIÊNCIA" meta="DA MAIS RECENTE PARA A MAIS ANTIGA" />
+      <div class="timeline">
+        <i class="timeline__line a-drawy d6" aria-hidden="true"></i>
+        {jobs.map(({ data: j }, i) => (
+          <article class:list={['job', { 'job--atual': j.atual, 'a-flicker': i < 2, [`d${8 + i}`]: i < 2 }]} data-reveal={i >= 2 ? '' : undefined}>
+            <i class:list={['job__dot', { 'a-lit d12': j.atual }]} aria-hidden="true"></i>
+            <span class="job__when">{j.periodo} // {j.duracao} // {j.modelo}</span>
+            <h3>{j.cargo} <span>@ {j.empresa}</span></h3>
+            {j.papel && <span class="tag tag--line">{j.papel}</span>}
+            <p>{j.contexto}</p>
+            <div class="terminal">
+              <ul>
+                {j.entregas.map((e) => {
+                  const m = e.match(/^([^:]{2,24}):\s(.*)$/);
+                  return m ? <li><strong>{m[1]}</strong>: {m[2]}</li> : <li>{e}</li>;
+                })}
+                {j.conquista && (
+                  <li>{j.conquista.texto} ..... <span class="ok">{j.conquista.status}</span></li>
+                )}
+              </ul>
+            </div>
+            <span class="job__stack">{j.stack.join(' · ')}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <aside class="split__side">
+      <section aria-labelledby="formacao" class="stack">
+        <SectionHead id="formacao" title="TRAINING // FORMAÇÃO" />
+        {formacao.map((f, i) => (
+          <div class="edu" data-reveal>
+            <span class={`small muted a-type d${10 + i * 2}`}>{f.status} // {f.instituicao}</span>
+            <strong>{f.curso}</strong>
+          </div>
+        ))}
+      </section>
+
+      <section aria-labelledby="competencias" class="stack">
+        <SectionHead id="competencias" title="LOADOUT // COMPETÊNCIAS" meta="O QUE JÁ USEI EM PRODUÇÃO" />
+        {competencias.map((g) => (
+          <div class="skill-group" data-reveal>
+            <span class="small cyan">$ {g.grupo}</span>
+            <ul>
+              {g.itens.map((item) => (
+                <li class:list={['pill', { 'pill--study': g.estudo }]}>{g.estudo ? `[~] ${item}` : item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <section aria-labelledby="upskill" class="stack">
+        <SectionHead id="upskill" title="UPSKILL // FORMAÇÃO CONTÍNUA" />
+        <div class="counter" data-reveal>
+          <b>{todosCursos.length}</b>
+          <span class="small muted">CURSOS LIVRES<br />{periodo}</span>
+        </div>
+        <span class="small cyan">$ cat destaques.txt</span>
+        <div class="terminal" data-reveal>
+          <ul>
+            {destaques.map((c) => (
+              <li><strong>{c.data.rotulo ?? c.data.nome}</strong> · {c.data.instituicao} · {c.data.data.slice(0, 4)}</li>
+            ))}
+          </ul>
+        </div>
+        <a class="btn btn--line" href="/cursos/">VER OS {todosCursos.length} CURSOS ▸</a>
+      </section>
+    </aside>
+  </div>
+</Base>
