@@ -36,7 +36,7 @@ const cursos = defineCollection({
 
 // Artigos em Markdown, um arquivo por artigo.
 const artigos = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/artigos' }),
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/artigos' }),
   schema: z.object({
     titulo: z.string(),
     descricao: z.string(),

@@ -1,0 +1,101 @@
+---
+// Demo de clickjacking desenhada em HTML/CSS (nunca um iframe de site real).
+// O HTML já vem no estado do passo 1; o JavaScript só adiciona o comportamento (sem trocar nada na tela).
+// A ilustração estática fica só no <noscript>, para quem não tem JavaScript.
+---
+
+<div class="cj" data-cj>
+  <div class="cj__demo">
+    <div class="cj__passos" role="group" aria-label="Passos da demo">
+      <button type="button" class="cj__step" data-step="1" aria-pressed="true">
+        <span class="cj__num" aria-hidden="true">1</span><span>O que a vítima vê</span>
+      </button>
+      <button type="button" class="cj__step" data-step="2" aria-pressed="false">
+        <span class="cj__num" aria-hidden="true">2</span><span>Revelar a armadilha</span>
+      </button>
+      <button type="button" class="cj__step" data-step="3" aria-pressed="false">
+        <span class="cj__num" aria-hidden="true">3</span><span>Com proteção</span>
+      </button>
+    </div>
+
+    <div class="cj__stage" data-step="1" data-cena="pre" aria-hidden="true">
+      <div class="cj__pilha">
+        <div class="cj__pagina cj__pagina--base">
+          <div class="cj__barra">
+            <span class="cj__pontos"><i></i><i></i><i></i></span>
+            <span class="cj__url"><span>https://</span><span class="cj__url-forte">promo-premios.xyz</span><span>/resgate</span></span>
+          </div>
+          <div class="cj__tela">
+            <p class="cj__kicker">PROMOÇÃO EXCLUSIVA</p>
+            <p class="cj__promo-titulo">Você foi selecionado para resgatar um prêmio</p>
+            <svg class="cj__premio" viewBox="0 0 96 96" aria-hidden="true">
+              <rect x="14" y="36" width="68" height="46" fill="#0b0d18" stroke="#ff2640" stroke-width="3" />
+              <rect x="8" y="26" width="80" height="14" fill="#ff2640" />
+              <rect x="44" y="26" width="8" height="56" fill="#3ce6ff" />
+              <path d="M48 26 C36 4 20 12 34 26 M48 26 C60 4 76 12 62 26" fill="none" stroke="#3ce6ff" stroke-width="3" />
+            </svg>
+            <p class="cj__contador">oferta expira em <span class="cj__tempo">00:04<span class="cj__colon">:</span>59</span></p>
+            <span class="cj__btn cj__btn--falso">Resgatar meu prêmio</span>
+          </div>
+        </div>
+
+        <div class="cj__pagina cj__pagina--banco">
+          <div class="cj__barra">
+            <span class="cj__pontos"><i></i><i></i><i></i></span>
+            <span class="cj__url"><span>https://</span><span class="cj__url-banco">banco-ficticio.example</span><span>/confirmar</span></span>
+          </div>
+          <div class="cj__tela">
+            <div class="cj__banco-conteudo">
+              <p class="cj__kicker cj__kicker--banco">BANCO FICTÍCIO // TRANSFERÊNCIA</p>
+              <p class="cj__linha cj__linha--1">Valor: <strong>R$ 1.990,00</strong></p>
+              <p class="cj__linha cj__linha--2">Destinatário: <strong>CONTA DE TERCEIROS</strong></p>
+              <span class="cj__btn cj__btn--real">Confirmar pagamento</span>
+            </div>
+            <div class="cj__bloqueio">
+              <p class="cj__bloqueio-titulo">BLOQUEADO</p>
+              <p class="cj__bloqueio-msg">frame-ancestors 'none': este site não pode ser embutido</p>
+            </div>
+          </div>
+        </div>
+
+        <span class="cj__guia cj__guia--esq"></span>
+        <span class="cj__guia cj__guia--dir"></span>
+      </div>
+
+      <p class="cj__rotulo cj__rotulo--topo">camada invisível (opacity: 0): o que ela realmente clica</p>
+      <p class="cj__rotulo cj__rotulo--base">camada visível: o que a vítima vê</p>
+
+      <svg class="cj__cursor" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 2 L4 20 L9 15 L12 22 L15 21 L12 14 L19 14 Z" fill="#f0f0f5" stroke="#05060c" stroke-width="1.5" />
+      </svg>
+      <span class="cj__clique"></span>
+
+      <div class="cj__notif">
+        <p class="cj__notif-titulo">Pagamento confirmado</p>
+        <p class="cj__notif-texto">R$ 1.990,00 para conta de terceiros</p>
+      </div>
+    </div>
+
+    <div class="cj__explicacoes" aria-live="polite">
+      <p class="cj__explica" data-step="1">A vítima vê um endereço estranho, mas uma promoção convincente. Nada aqui parece suspeito.</p>
+      <p class="cj__explica" data-step="2" hidden>Camadas separadas: por cima, a página do banco, transparente e alinhada ao botão do prêmio.</p>
+      <p class="cj__explica" data-step="3" hidden>Com frame-ancestors 'none', o navegador se recusa a carregar o site dentro de outro: a camada nem aparece.</p>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="diagram">
+      <img
+        class="diagram__img"
+        src="/images/clickjacking.svg"
+        width="760"
+        height="600"
+        alt="Diagrama em camadas: embaixo, um site falso com o botão Ganhe um prêmio; em cima, um iframe semitransparente de um banco fictício com o botão Confirmar pagamento exatamente sobre o botão falso. Um cursor clica no botão falso e a seta mostra que o clique atinge a camada de cima."
+      />
+    </div>
+  </noscript>
+</div>
+
+<script>
+  import '../scripts/clickjacking-demo';
+</script>

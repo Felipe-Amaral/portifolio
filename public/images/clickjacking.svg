@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="600" viewBox="0 0 760 600" font-family="'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">
+  <title>Clickjacking em camadas: o clique na página falsa atinge o botão do iframe</title>
+  <rect width="760" height="600" fill="#05060c"/>
+
+  <!-- Camada de baixo: o site falso que a vítima vê -->
+  <g transform="matrix(0.866 0.5 -0.866 0.5 380 380)">
+    <polygon points="-220,-140 220,-140 220,140 -220,140" fill="#0b0d18" stroke="#ff2640" stroke-width="3"/>
+    <rect x="-196" y="-118" width="392" height="34" fill="#05060c" stroke="#3ce6ff" stroke-opacity="0.5"/>
+    <text x="-180" y="-96" fill="#ff2640" font-size="18" font-weight="700">SORTEIO EXCLUSIVO</text>
+    <rect x="-196" y="-60" width="260" height="10" fill="#1a1f33"/>
+    <rect x="-196" y="-40" width="180" height="10" fill="#1a1f33"/>
+    <rect x="-120" y="-20" width="240" height="70" fill="#ff2640"/>
+    <text x="0" y="22" text-anchor="middle" fill="#05060c" font-size="22" font-weight="700">GANHE UM PRÊMIO</text>
+  </g>
+
+  <!-- Camada de cima: iframe semitransparente de um banco fictício -->
+  <g transform="matrix(0.866 0.5 -0.866 0.5 380 220)">
+    <polygon points="-220,-140 220,-140 220,140 -220,140" fill="#3ce6ff" fill-opacity="0.12" stroke="#3ce6ff" stroke-width="3"/>
+    <rect x="-196" y="-118" width="392" height="34" fill="#05060c" fill-opacity="0.7" stroke="#3ce6ff" stroke-opacity="0.6"/>
+    <text x="-180" y="-96" fill="#3ce6ff" font-size="18" font-weight="700">BANCO FICTÍCIO</text>
+    <rect x="-196" y="-60" width="260" height="10" fill="#3ce6ff" fill-opacity="0.25"/>
+    <rect x="-120" y="-20" width="240" height="70" fill="#05060c" fill-opacity="0.75" stroke="#3ce6ff" stroke-width="3"/>
+    <text x="0" y="22" text-anchor="middle" fill="#3ce6ff" font-size="18" font-weight="700">CONFIRMAR PAGAMENTO</text>
+  </g>
+
+  <!-- Seta do clique: sai do cursor na camada de baixo e atinge o botão da camada de cima -->
+  <line x1="358" y1="376" x2="358" y2="240" stroke="#ff2640" stroke-width="2" stroke-dasharray="6 5"/>
+  <polygon points="358,226 352,240 364,240" fill="#ff2640"/>
+
+  <!-- Cursor clicando no botão falso -->
+  <circle cx="358" cy="392" r="14" fill="none" stroke="#ff2640" stroke-width="2"/>
+  <path d="M358 384 L358 404 L363 399 L367 408 L371 406 L367 397 L374 397 Z" fill="#f0f0f5" stroke="#05060c" stroke-width="1.5"/>
+
+  <!-- Rótulos com linhas de apoio -->
+  <text x="500" y="34" fill="#3ce6ff" font-size="16" font-weight="700">o que ela realmente clica</text>
+  <line x1="500" y1="42" x2="392" y2="222" stroke="#3ce6ff" stroke-width="1.5"/>
+  <text x="24" y="584" fill="#ff2640" font-size="16" font-weight="700">o que a vítima vê</text>
+  <line x1="120" y1="572" x2="206" y2="440" stroke="#ff2640" stroke-width="1.5"/>
+</svg>
