@@ -4,6 +4,8 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://feliperigler.dev',
   output: 'static',
+  // Astro 7 passou a remover espaços entre elementos (regra JSX). Mantém o comportamento do v6.
+  compressHTML: true,
   build: {
     format: 'directory',
     // CSS sempre em arquivo: a CSP (public/_headers) não libera <style> inline.
