@@ -1,0 +1,62 @@
+---
+// Player de podcast do artigo — melhora progressiva do <audio> nativo.
+// Uso: <PodcastPlayer src="/audio/meu-episodio.mp3" titulo="..." tamanho="~10 MB" duracao="10:52" />
+interface Props {
+  src: string;
+  titulo: string;
+  tamanho?: string; // ex.: "~10 MB"
+  duracao?: string; // ex.: "10:52" — opcional; sem ela aparece --:-- até carregar
+  id?: string;
+}
+const { src, titulo, tamanho, duracao = '', id = 'pod' } = Astro.props;
+const formato = src.split('.').pop()?.toUpperCase() ?? 'ÁUDIO';
+const barras = Array.from({ length: 48 });
+---
+
+<section class="pod" data-pod data-state="idle" data-duracao={duracao} aria-labelledby={`${id}-titulo`}>
+  <div class="pod__head">
+    <span class="pod__kicker">PREFERE OUVIR? // PODCAST</span>
+    <h2 class="pod__title" id={`${id}-titulo`}>{titulo}</h2>
+    <p class="pod__ai"><b>[~]</b> Podcast gerado com IA (NotebookLM) a partir deste artigo</p>
+  </div>
+
+  <audio class="pod__native" controls preload="none" src={src}>
+    Seu navegador não toca áudio. <a href={src} download>Baixe o episódio</a>.
+  </audio>
+
+  <div class="pod__ui" hidden>
+    <button class="pod__play" type="button" aria-label="Reproduzir podcast" aria-controls={`${id}-seek`}>
+      <span class="pod__icon pod__icon--play" aria-hidden="true"></span>
+      <span class="pod__icon pod__icon--pause" aria-hidden="true"></span>
+      <span class="pod__icon pod__icon--load" aria-hidden="true"></span>
+    </button>
+
+    <div class="pod__track">
+      <div class="pod__wave">
+        <span class="pod__bars" aria-hidden="true">{barras.map(() => <i></i>)}</span>
+        <span class="pod__bars pod__bars--fill" aria-hidden="true">{barras.map(() => <i></i>)}</span>
+        <input class="pod__seek" id={`${id}-seek`} type="range" min="0" max="1000" step="1" value="0"
+               aria-label="Posição no episódio" aria-valuetext={`00:00 de ${duracao || '--:--'}`} />
+      </div>
+      <div class="pod__meta">
+        <span class="pod__time"><span data-pod-cur>00:00</span> <span>/ <span data-pod-dur>{duracao || '--:--'}</span></span></span>
+        <span class="pod__status" data-pod-status aria-live="polite">[ ] PRONTO PARA OUVIR</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pod__foot">
+    <fieldset class="pod__speed" data-pod-speed hidden>
+      <legend>VELOCIDADE</legend>
+      <label><input type="radio" name={`${id}-velocidade`} value="1" checked /><span>1x</span></label>
+      <label><input type="radio" name={`${id}-velocidade`} value="1.25" /><span>1.25x</span></label>
+      <label><input type="radio" name={`${id}-velocidade`} value="1.5" /><span>1.5x</span></label>
+      <label><input type="radio" name={`${id}-velocidade`} value="2" /><span>2x</span></label>
+    </fieldset>
+    <a class="pod__dl" href={src} download>BAIXAR ÁUDIO&nbsp;<span>// {formato}{tamanho ? ` · ${tamanho}` : ''}</span></a>
+  </div>
+</section>
+
+<script>
+  import '../scripts/podcast-player';
+</script>

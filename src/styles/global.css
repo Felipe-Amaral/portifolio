@@ -718,3 +718,227 @@ a.card:hover { border-color: var(--red); color: var(--ink); }
   ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
   .photo__sweep { display: none; }
 }
+
+/* =========================================================
+   Podcast player — Red Team Ops
+   Usa os tokens de src/styles/global.css (--void, --red, --cyan, --ink, --ink-muted, --mono).
+   Sem JavaScript: aparece o <audio controls> nativo + link de download.
+   Com JavaScript: scripts/podcast-player.ts adiciona .pod--js, esconde o nativo e mostra .pod__ui.
+   Estado atual em [data-state]: idle | loading | playing | paused | ended | error.
+   Progresso em --p (0%–100%), definido via CSSOM (element.style.setProperty), compatível com a CSP.
+   ========================================================= */
+
+.pod {
+  --p: 0%;
+  position: relative;
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+  background: var(--panel, #000000);
+  border: 1px solid rgba(255, 38, 64, 0.55);
+  font-family: var(--mono);
+  color: var(--ink);
+}
+
+/* Cantoneiras de mira (decorativas) */
+.pod::before,
+.pod::after {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 0 solid var(--cyan);
+  pointer-events: none;
+}
+.pod::before { top: -1px; left: -1px; border-top-width: 3px; border-left-width: 3px; }
+.pod::after { bottom: -1px; right: -1px; border-bottom-width: 3px; border-right-width: 3px; }
+
+/* ---------- cabeçalho ---------- */
+.pod__head { display: flex; flex-direction: column; gap: 6px; }
+.pod__kicker { font-size: 14px; line-height: 20px; font-weight: 700; color: var(--red); }
+.pod__kicker::before { content: '▌'; }
+.pod__title { margin: 0; font-size: 20px; line-height: 28px; font-weight: 700; color: var(--ink); }
+.pod__ai { margin: 0; font-size: 13px; line-height: 20px; color: var(--ink-muted); }
+.pod__ai b { font-weight: 400; color: var(--cyan); }
+
+/* ---------- player nativo (fallback sem JS) ---------- */
+.pod__native { display: block; width: 100%; }
+.pod--js .pod__native { display: none; }
+
+/* ---------- interface customizada ---------- */
+.pod__ui { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 20px; align-items: center; }
+.pod__ui[hidden] { display: none; }
+
+/* Botão play/pause */
+.pod__play {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--red);
+  color: var(--void);
+  cursor: pointer;
+}
+.pod__play:hover { background: var(--ink); }
+.pod__play:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.pod__play:disabled { cursor: progress; }
+
+.pod__icon { display: none; }
+.pod__icon--play { width: 22px; height: 26px; margin-left: 5px; background: currentColor; clip-path: polygon(0 0, 100% 50%, 0 100%); }
+.pod__icon--pause { width: 22px; height: 26px; border-left: 8px solid currentColor; border-right: 8px solid currentColor; }
+.pod__icon--load { width: 26px; height: 26px; border: 3px solid currentColor; border-right-color: transparent; border-bottom-color: transparent; animation: pod-spin 800ms steps(8) infinite; }
+
+.pod[data-state='idle'] .pod__icon--play,
+.pod[data-state='paused'] .pod__icon--play,
+.pod[data-state='ended'] .pod__icon--play,
+.pod[data-state='error'] .pod__icon--play,
+.pod:not([data-state]) .pod__icon--play { display: block; }
+.pod[data-state='playing'] .pod__icon--pause { display: block; }
+.pod[data-state='loading'] .pod__icon--load { display: block; }
+
+/* Trilha: onda + linha de tempo */
+.pod__track { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+
+.pod__wave { position: relative; height: 48px; }
+.pod__bars {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  pointer-events: none;
+}
+.pod__bars i { flex: 1 1 0; min-width: 2px; height: 40%; background: rgba(150, 159, 180, 0.35); }
+.pod__bars--fill { clip-path: inset(0 calc(100% - var(--p)) 0 0); }
+.pod__bars--fill i { background: var(--red); }
+
+/* Alturas da onda (padrão de 16 que se repete) */
+.pod__bars i:nth-child(16n + 1) { height: 30%; }
+.pod__bars i:nth-child(16n + 2) { height: 55%; }
+.pod__bars i:nth-child(16n + 3) { height: 40%; }
+.pod__bars i:nth-child(16n + 4) { height: 75%; }
+.pod__bars i:nth-child(16n + 5) { height: 50%; }
+.pod__bars i:nth-child(16n + 6) { height: 92%; }
+.pod__bars i:nth-child(16n + 7) { height: 62%; }
+.pod__bars i:nth-child(16n + 8) { height: 35%; }
+.pod__bars i:nth-child(16n + 9) { height: 70%; }
+.pod__bars i:nth-child(16n + 10) { height: 45%; }
+.pod__bars i:nth-child(16n + 11) { height: 85%; }
+.pod__bars i:nth-child(16n + 12) { height: 55%; }
+.pod__bars i:nth-child(16n + 13) { height: 38%; }
+.pod__bars i:nth-child(16n + 14) { height: 66%; }
+.pod__bars i:nth-child(16n + 15) { height: 28%; }
+.pod__bars i:nth-child(16n + 16) { height: 50%; }
+
+/* Agulha de reprodução (só depois que começa) */
+.pod__wave::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: var(--p);
+  width: 2px;
+  margin-left: -1px;
+  background: var(--cyan);
+  opacity: 0;
+  pointer-events: none;
+}
+.pod[data-state='playing'] .pod__wave::after,
+.pod[data-state='paused'] .pod__wave::after,
+.pod[data-state='loading'] .pod__wave::after { opacity: 1; }
+
+/* Barra de progresso: <input type="range"> nativo, invisível sobre a onda.
+   Arrastar a onda = arrastar a barra. Teclado: setas, Home, End, PageUp/PageDown. */
+.pod__seek {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.pod__wave:has(.pod__seek:focus-visible) { outline: 2px solid var(--cyan); outline-offset: 4px; }
+
+/* Tempo + status */
+.pod__meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; }
+.pod__time { font-size: 15px; line-height: 22px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.pod__time span:last-child { color: var(--ink-muted); }
+.pod__status { font-size: 12px; line-height: 18px; font-weight: 700; color: var(--ink-muted); }
+.pod[data-state='loading'] .pod__status { color: var(--cyan); animation: pod-blink 1s steps(1) infinite; }
+.pod[data-state='playing'] .pod__status { color: var(--ink); }
+.pod[data-state='playing'] .pod__status::first-letter { color: var(--red); }
+.pod[data-state='error'] .pod__status { color: var(--red); }
+
+/* ---------- rodapé: velocidade + download ---------- */
+.pod__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 20px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(150, 159, 180, 0.15);
+}
+.pod__foot[hidden] { display: none; }
+
+.pod__speed[hidden] { display: none; }
+.pod__speed { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.pod__speed legend { float: left; margin-right: 6px; padding: 0; font-size: 12px; line-height: 36px; font-weight: 700; color: var(--ink-muted); }
+.pod__speed label { position: relative; display: inline-flex; cursor: pointer; }
+.pod__speed input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.pod__speed span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 10px;
+  border: 1px solid rgba(150, 159, 180, 0.4);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+.pod__speed label:hover span { border-color: var(--red); color: var(--ink); }
+.pod__speed input:checked + span { background: var(--red); border-color: var(--red); color: var(--void); }
+.pod__speed input:focus-visible + span { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+.pod__dl {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-decoration: none;
+}
+.pod__dl:hover { color: var(--ink); }
+.pod__dl:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.pod__dl span { color: var(--ink-muted); font-weight: 400; }
+
+/* ---------- celular ---------- */
+@media (max-width: 600px) {
+  .pod { padding: 18px 16px; gap: 16px; }
+  .pod__title { font-size: 17px; line-height: 24px; }
+  .pod__ui { gap: 14px; }
+  .pod__play { width: 60px; height: 60px; }
+  .pod__wave { height: 40px; }
+  .pod__bars { gap: 2px; }
+  .pod__bars i:nth-child(n + 33) { display: none; }
+  .pod__foot { flex-direction: column; align-items: stretch; }
+  .pod__speed span { min-height: 44px; padding: 0 12px; }
+  .pod__speed legend { line-height: 44px; }
+  .pod__dl { justify-content: center; border: 1px solid rgba(60, 230, 255, 0.5); }
+}
+
+/* ---------- movimento ---------- */
+@keyframes pod-spin { to { transform: rotate(360deg); } }
+@keyframes pod-blink { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pod__icon--load,
+  .pod[data-state='loading'] .pod__status { animation: none; }
+}

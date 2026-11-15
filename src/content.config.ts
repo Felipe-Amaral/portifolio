@@ -44,6 +44,13 @@ const artigos = defineCollection({
     tipo: z.enum(['ADR', 'FIELD NOTES', 'INCIDENT REPORT', 'THREAT MODEL', 'SRE', 'DEBRIEF']).default('FIELD NOTES'),
     tags: z.array(z.string()).default([]),
     video: z.string().optional(), // ID do vídeo no YouTube
+    podcast: z
+      .object({
+        arquivo: z.string(), // ex.: '/audio/headers-http-camada-sem-dono.mp3'
+        tamanho: z.string().optional(), // ex.: '~10 MB'
+        duracao: z.string().optional(), // ex.: '10:52'
+      })
+      .optional(),
     rascunho: z.boolean().default(false),
   }),
 });

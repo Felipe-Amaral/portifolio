@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { artigos, formatarData, minutosDeLeitura } from '../../lib/colecoes';
 import { site } from '../../data/site';
+import PodcastPlayer from '../../components/PodcastPlayer.astro';
 
 export async function getStaticPaths() {
   const lista = await artigos();
@@ -30,6 +31,9 @@ const secoes = headings.filter((h) => h.depth === 2);
     </div>
     <h1 class="title title--long a-glitch d4"><span>{a.titulo}</span></h1>
     <p class="lead muted a-flicker d8">{a.descricao}</p>
+    {a.podcast && (
+      <PodcastPlayer src={a.podcast.arquivo} titulo={a.titulo} tamanho={a.podcast.tamanho} duracao={a.podcast.duracao} />
+    )}
     {a.tags.length > 0 && (
       <ul class="row" aria-label="Tags">
         {a.tags.map((t) => <li class="pill">{t.toUpperCase()}</li>)}
