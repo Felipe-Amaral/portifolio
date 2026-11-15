@@ -1,6 +1,6 @@
 ---
-titulo: "Meu portfólio tirava nota A em segurança. E isso não era suficiente."
-descricao: "O diagnóstico de uma brecha num site estático, as proteções que cada header faz e o que isso significa para aplicações com login."
+titulo: "Headers HTTP: a camada de segurança que não tem dono"
+descricao: "Auditei meu próprio site e elevei a segurança de A para A+"
 data: 2026-11-15
 tipo: FIELD NOTES
 tags: [segurança, cloudflare, headers, https, hsts]
@@ -8,10 +8,11 @@ rascunho: true
 ---
 
 import ClickjackingDemo from '../../components/ClickjackingDemo.astro';
+import HeadersGrade from '../../components/HeadersGrade.astro';
 
-Hoje eu descobri que o meu site de portfólio, um site estático, sem banco, sem login, sem formulário, tinha uma brecha. Pequena, mas real. E se ela existia num site que é praticamente um currículo, a pergunta que ficou foi: e nas aplicações que eu construí nos últimos 14 anos?
+Rodei uma auditoria de segurança no meu próprio site de portfólio: estático, sem banco, sem login, sem formulário. Nota A logo no primeiro teste. Mesmo assim, encontrei uma brecha. Pequena, mas real, e numa camada que quase nunca aparece em code review: os headers HTTP. Ela fica entre o dev e a infra, e por isso costuma ficar sem dono.
 
-Este artigo conta o que encontrei, o que cada proteção faz, quais trade-offs eu aceitei e por que vale você olhar a sua aplicação hoje.
+Este artigo mostra o que encontrei, o que cada proteção faz, quais trade-offs aceitei e por que vale olhar a sua aplicação hoje.
 
 ## O diagnóstico
 
@@ -174,6 +175,10 @@ Mas ele **não** envia CSP nem HSTS por padrão. Se ninguém configurou no Nginx
 - podendo ser embutida num iframe para clickjacking no botão "confirmar pagamento".
 
 No Laravel, dá para resolver com um middleware próprio, um pacote como `spatie/laravel-csp`, ou direto na camada de infraestrutura.
+
+Resumo por gravidade, pensando numa aplicação com login:
+
+<HeadersGrade />
 
 ## Teste agora
 

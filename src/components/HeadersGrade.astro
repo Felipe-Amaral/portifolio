@@ -1,0 +1,67 @@
+---
+// Grade de headers de segurança com o estrago que cada um evita numa aplicação com login, por gravidade.
+// Só HTML e CSS (global.css): sem JavaScript e sem estilo inline.
+type Gravidade = 'alta' | 'media' | 'baixa';
+
+const rotulos: Record<Gravidade, string> = { alta: 'Alta', media: 'Média', baixa: 'Baixa' };
+
+const headers: Array<{ nome: string; gravidade: Gravidade; evita: string; estrago: string }> = [
+  {
+    nome: 'HTTPS (redirect)',
+    gravidade: 'alta',
+    evita: 'Tráfego lido e alterado numa rede pública.',
+    estrago: 'Senha e cookie de sessão roubados; conta sequestrada.',
+  },
+  {
+    nome: 'HSTS',
+    gravidade: 'media',
+    evita: 'A primeira requisição em HTTP, antes do redirect (SSL stripping).',
+    estrago: 'Mesmo dano do HTTPS, numa janela de ataque que o redirect sozinho não fecha.',
+  },
+  {
+    nome: 'CSP',
+    gravidade: 'alta',
+    evita: 'XSS: script injetado no navegador da vítima.',
+    estrago: 'Roubo de sessão, ações em nome do usuário, captura do que ele digita, vazamento de dados (LGPD).',
+  },
+  {
+    nome: 'X-Frame-Options / frame-ancestors',
+    gravidade: 'media',
+    evita: 'Clickjacking: seu site num iframe invisível.',
+    estrago: 'Usuário clica sem saber em "confirmar pagamento" ou "apagar conta".',
+  },
+  {
+    nome: 'X-Content-Type-Options: nosniff',
+    gravidade: 'baixa',
+    evita: 'Arquivo enviado como "imagem" sendo executado como script.',
+    estrago: 'XSS a partir de uploads. Sobe para alta se a aplicação aceita arquivos de usuários.',
+  },
+  {
+    nome: 'Referrer-Policy',
+    gravidade: 'media',
+    evita: 'Vazamento da URL de origem para outros sites.',
+    estrago: 'Tokens, IDs ou buscas que estão na URL chegam a terceiros.',
+  },
+  {
+    nome: 'Permissions-Policy',
+    gravidade: 'baixa',
+    evita: 'Script de terceiro pedindo câmera, microfone ou localização.',
+    estrago: 'Abuso de permissões em nome do seu domínio.',
+  },
+];
+---
+
+<div class="hgrade">
+  {
+    headers.map((h) => (
+      <article class={`hcard hcard--${h.gravidade}`}>
+        <div class="hcard__topo">
+          <h3 class="hcard__nome">{h.nome}</h3>
+          <span class={`hcard__badge hcard__badge--${h.gravidade}`}>Gravidade {rotulos[h.gravidade].toLowerCase()}</span>
+        </div>
+        <p class="hcard__texto"><strong>Evita:</strong> {h.evita}</p>
+        <p class="hcard__texto"><strong>Estrago com login:</strong> {h.estrago}</p>
+      </article>
+    ))
+  }
+</div>
