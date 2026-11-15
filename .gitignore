@@ -1,3 +1,22 @@
-node_modules
-.astro/
+# build
 dist/
+.astro/
+
+# dependências
+node_modules/
+
+# cloudflare
+.wrangler/
+.dev.vars
+
+# ambiente
+.env
+.env.*
+!.env.example
+
+# sistema
+.DS_Store
+*.log
+
+# metadados do Windows
+*:Zone.Identifier
