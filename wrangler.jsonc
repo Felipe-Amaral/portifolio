@@ -2,7 +2,7 @@
 // então não existe código de Worker. A Cloudflare só serve a pasta dist/.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "feliperigler",
+  "name": "felipe-amaral-portfolio",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./dist",
