@@ -103,6 +103,83 @@ ul.row { list-style: none; margin: 0; padding: 0; }
 .rec { font-size: 16px; line-height: 26px; color: var(--ink); }
 .rec__dot { color: var(--red); animation: rt-blink 1.6s steps(1) infinite; }
 
+/* ---------- menu mobile (Popover API nativa, sem JavaScript) ----------
+   Até 720px o cabeçalho mostra só a marca e o botão [≡] MENU; o menu abre em tela cheia.
+   Sem suporte a popover, nada disso aparece e o nav horizontal continua (quebrando em linhas). */
+.menu-btn {
+  display: none; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 0;
+  background: transparent; color: var(--ink); border: 1px solid rgba(255, 38, 64, 0.7);
+  font: 700 14px/1 var(--mono); cursor: pointer;
+}
+.menu-btn:hover { background: var(--red); color: var(--void); border-color: var(--red); }
+.mnav { display: none; }
+@media (max-width: 720px) { .page { padding-top: 0; } }
+
+@supports selector(:popover-open) {
+  @media (max-width: 720px) {
+    .site-header { flex-wrap: nowrap; min-height: 72px; padding: 0; }
+    .site-header > .nav, .site-header > .rec { display: none; }
+    .site-header > .brand { font-size: 18px; line-height: 24px; }
+    .menu-btn { display: inline-flex; }
+  }
+}
+
+.mnav:popover-open {
+  position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0;
+  padding: 0 20px 24px; display: flex; flex-direction: column; overflow-y: auto;
+  color: var(--ink); font-family: var(--mono);
+  background-color: var(--void);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(255, 38, 64, 0.055) 0 1px, transparent 1px 54px),
+    repeating-linear-gradient(0deg, rgba(255, 38, 64, 0.055) 0 1px, transparent 1px 54px);
+  animation: rt-pagein 240ms steps(1) both;
+}
+.mnav::backdrop { background: var(--void); }
+body:has(.mnav:popover-open) { overflow: hidden; }
+
+.mnav__corner { position: absolute; width: 40px; height: 40px; border: 0 solid var(--red); pointer-events: none; }
+.mnav__corner:nth-of-type(1) { top: 84px; left: 10px; border-top-width: 4px; border-left-width: 4px; }
+.mnav__corner:nth-of-type(2) { top: 84px; right: 10px; border-top-width: 4px; border-right-width: 4px; }
+.mnav__corner:nth-of-type(3) { bottom: 10px; left: 10px; border-bottom-width: 4px; border-left-width: 4px; }
+.mnav__corner:nth-of-type(4) { bottom: 10px; right: 10px; border-bottom-width: 4px; border-right-width: 4px; }
+
+.mnav__top { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 72px; border-bottom: 1px solid var(--line); }
+.mnav__brand { font-size: 18px; line-height: 24px; font-weight: 700; color: var(--red); text-decoration: none; }
+.mnav__brand:hover { color: var(--red); }
+.mnav__close {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 0;
+  background: var(--red); color: var(--void); border: 1px solid var(--red);
+  font: 700 14px/1 var(--mono); cursor: pointer;
+}
+.mnav__close:hover { background: var(--ink); border-color: var(--ink); }
+
+.mnav__cmd { margin-top: 40px; padding-left: 20px; font-size: 15px; line-height: 22px; color: var(--cyan); animation: rt-wipe 300ms steps(6) 120ms both; }
+
+.mnav__list { list-style: none; margin: 16px 0 0; padding: 0; border-top: 1px solid rgba(150, 159, 180, 0.15); }
+.mnav__list a {
+  display: flex; align-items: center; min-height: 64px; padding: 0 20px;
+  border-bottom: 1px solid rgba(150, 159, 180, 0.15);
+  font-size: 24px; font-weight: 700; color: var(--ink); text-decoration: none;
+  animation: rt-wipe 300ms steps(6) both;
+}
+.mnav__list li:nth-child(1) a { animation-delay: 200ms; }
+.mnav__list li:nth-child(2) a { animation-delay: 240ms; }
+.mnav__list li:nth-child(3) a { animation-delay: 280ms; }
+.mnav__list li:nth-child(4) a { animation-delay: 320ms; }
+.mnav__list li:nth-child(5) a { animation-delay: 360ms; }
+.mnav__list a:hover { background: rgba(255, 38, 64, 0.1); color: var(--ink); }
+.mnav__list a[aria-current='page'] { color: var(--red); }
+.mnav__mark { flex: 0 0 22px; color: var(--red); }
+.mnav__n { flex: 0 0 34px; font-size: 14px; font-weight: 400; color: var(--ink-muted); }
+
+.mnav__foot { margin-top: auto; padding: 24px 20px 0; display: flex; flex-direction: column; gap: 14px; }
+.mnav__links { display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 14px; line-height: 44px; font-weight: 700; }
+.mnav__links a { color: var(--cyan); text-decoration: none; }
+.mnav__links a:hover { color: var(--ink); }
+.mnav__meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 12px; line-height: 18px; color: var(--ink-muted); }
+.mnav__rec { color: var(--ink); white-space: nowrap; }
+
 /* ---------- tipografia da identidade ---------- */
 .kicker { font-size: 24px; line-height: 30px; font-weight: 700; color: var(--red); }
 .kicker::before { content: '▌'; }

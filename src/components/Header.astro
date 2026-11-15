@@ -15,4 +15,41 @@ const hoje = new Date().toISOString().slice(0, 10);
     ))}
   </nav>
   <span class="rec a-wipe d5"><span class="rec__dot" aria-hidden="true">●</span> REC {hoje}</span>
+
+  <!-- Menu mobile: Popover API nativa, sem JavaScript. Só aparece até 720px (ver global.css). -->
+  <button class="menu-btn" type="button" popovertarget="menu-mobile" aria-label="Abrir menu">[≡] MENU</button>
+  <nav id="menu-mobile" class="mnav" popover aria-label="Principal (mobile)">
+    <i class="mnav__corner" aria-hidden="true"></i><i class="mnav__corner" aria-hidden="true"></i><i class="mnav__corner" aria-hidden="true"></i><i class="mnav__corner" aria-hidden="true"></i>
+    <div class="mnav__top">
+      <a class="mnav__brand" href="/">▌{site.nome.toUpperCase()}</a>
+      <button class="mnav__close" type="button" popovertarget="menu-mobile" popovertargetaction="hide" aria-label="Fechar menu">[X] FECHAR</button>
+    </div>
+    <span class="mnav__cmd" aria-hidden="true">$ ls ./site</span>
+    <ul class="mnav__list">
+      {nav.map((item, i) => {
+        const atual = isCurrent(item.href);
+        return (
+          <li>
+            <a href={item.href} aria-current={atual ? 'page' : undefined}>
+              <span class="mnav__mark" aria-hidden="true">{atual ? '▸' : ''}</span>
+              <span class="mnav__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span>{item.label}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+    <div class="mnav__foot">
+      {(site.links.linkedin || site.links.github) && (
+        <div class="mnav__links">
+          {site.links.linkedin && <a href={site.links.linkedin} target="_blank" rel="me noopener noreferrer">LINKEDIN ↗</a>}
+          {site.links.github && <a href={site.links.github} target="_blank" rel="me noopener noreferrer">GITHUB ↗</a>}
+        </div>
+      )}
+      <div class="mnav__meta">
+        <span>PENSE COMO O ATACANTE.<br />CONSTRUA COMO QUEM DEFENDE.</span>
+        <span class="mnav__rec"><span class="rec__dot" aria-hidden="true">●</span> REC</span>
+      </div>
+    </div>
+  </nav>
 </header>
