@@ -364,6 +364,9 @@ a.card:hover { border-color: var(--red); color: var(--ink); }
 .a-lock { animation: rt-lock 420ms var(--ease-lock) both; }
 .a-lit { animation: rt-lit 60ms steps(1) both; }
 .a-sweep { animation: rt-sweep 700ms linear both; }
+/* Uptime: a última barra acesa é o "sinal ao vivo"; depois de acender, pisca devagar. */
+.a-lit.live { animation: rt-lit 60ms steps(1) 1560ms both, rt-pulse 1s steps(1) 1700ms infinite; }
+@keyframes rt-pulse { 50% { opacity: 0.25; } }
 /* Foto do hero: enquanto não está na tela (.is-wait sem .is-live, ver scripts/photo.ts), nada anima. */
 .photo.is-wait:not(.is-live) :is(.a-flicker, .a-sweep, .a-draw, .a-drawy, .a-lock, .a-lit, .a-wipe) {
   animation: none;
