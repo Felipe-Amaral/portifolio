@@ -28,6 +28,9 @@ jobs:
       - name: Auditoria de dependências
         run: npm audit --omit=dev --audit-level=high
 
+      - name: Instalar Chromium para renderizar diagramas Mermaid
+        run: npx playwright install --with-deps chromium
+
       - name: Build
         run: npm run build
 
