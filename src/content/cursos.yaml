@@ -2,6 +2,12 @@
 # area: backend | ia | soft | frontend | arquitetura | dados | devops | outros
 # destaque: true -> aparece no currículo (use "rotulo" para outro nome no destaque).
 
+- id: c116
+  nome: "AI Foundation"
+  instituicao: "Impacta Tecnologia"
+  data: "2026-11"
+  area: ia
+
 - id: c001
   nome: "UML"
   instituicao: "Udemy"
