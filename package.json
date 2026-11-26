@@ -21,6 +21,6 @@
     "rehype-mermaid": "^3.0.0"
   },
   "devDependencies": {
-    "wrangler": "^4.0.0"
+    "wrangler": "^4.165.0"
   }
 }
